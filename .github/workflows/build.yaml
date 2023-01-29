@@ -99,9 +99,10 @@ jobs:
             - name: Install Dependencies
               working-directory: ./scripts
               run: |
-                  sudo apt update && sudo apt -y install setools lzip cabextract wine winetricks patchelf e2fsprogs python3-pip aria2 p7zip-full attr xz-utils unzip
+                  sudo apt update && sudo apt -y install setools lzip cabextract wine patchelf e2fsprogs python3-pip aria2 p7zip-full attr xz-utils unzip
                   python3 -m pip install requests
-                  cp -r ../wine/.cache/* ~/.cache
+                  sudo wget -P /usr/local/bin/ https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks
+                  sudo chmod +x /usr/local/bin/winetricks
                   winetricks msxml6
             - name: Build MagiskOnWSA
               working-directory: ./scripts
