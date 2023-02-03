@@ -15,6 +15,8 @@
 - Update to the new version while preserving data with a one-click script
 - Merged all language packs
 
+## Text Guide
+
 1. Extract the compressed file and open the folder created after the extraction of the file.
 1. Here look for file `Run.bat` and run it.
     - If you previously have a MagiskOnWSA installation, it will automatically uninstall the previous one while **preserving all user data** and install the new one, so don't worry about your data.
