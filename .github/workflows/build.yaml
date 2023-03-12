@@ -31,6 +31,7 @@ on:
                     - Beta
                     - Canary
                     - Debug
+                    - KernelSU
 #                    - Custom
 #            magisk_url:
 #                description: "Custom Magisk APK/ZIP URL"
@@ -239,7 +240,10 @@ jobs:
                       fi
                       OFFLINE="--offline"
                   fi
-
+                  if [[ "${{ inputs.magisk_ver }}" == "KernelSU" ]]; then
+                    ROOT_SOL="kernelsu"
+                    MAGISK_VER=stable
+                  fi
                   COMMAND_LINE=(--arch "$ARCH" --release-type "$RELEASE_TYPE" --root-sol "$ROOT_SOL" --magisk-ver "$MAGISK_VER" "$CUSTOM_MAGISK" --gapps-brand "$GAPPS_BRAND" --gapps-variant "$GAPPS_VAR" "$COMPRESSION" "$REMOVE_AMAZON" "$NOFIX_PROPS" "$SKIP_DOWNLOAD_WSA" "$OFFLINE")
                   echo "COMMAND_LINE=${COMMAND_LINE[*]}"
 
