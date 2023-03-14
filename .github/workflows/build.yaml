@@ -261,6 +261,9 @@ jobs:
                   else
                       magiskVer="_Magisk-${{ env.MAGISK_VERSION }}"
                   fi
+                  if [[ "${{ inputs.magisk_ver }}" == "KernelSU" ]]; then
+                      magiskVer="_KernelSU-${{ env.KERNELSU_VERSION }}"
+                  fi
                   export magiskVer
 
                   if [[ "${{ inputs.gapps_var }}" == "None" ]]; then
