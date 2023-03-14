@@ -21,18 +21,18 @@ on:
                     - Beta Channel
                     - Dev Channel
             magisk_ver:
-                description: "Magisk Version"
+                description: "Root Solution"
                 required: true
-                default: "Stable"
+                default: "Magisk Stable"
                 type: choice
                 options:
                     - None
-                    - Stable
-                    - Beta
-                    - Canary
-                    - Debug
+                    - Magisk Stable
+                    - Magisk Beta
+                    - Magisk Canary
+                    - Magisk Debug
                     - KernelSU
-#                    - Custom
+#                    - Magisk Custom
 #            magisk_url:
 #                description: "Custom Magisk APK/ZIP URL"
 #                required: false
@@ -111,7 +111,7 @@ jobs:
                   DOWNLOAD_DIR=../download
                   DOWNLOAD_CONF_NAME=download.list
 
-                  declare -A opts=( ["ARCH,x86_64"]="x64" ["ARCH,ARM64"]="arm64" ["RELEASE_TYPE,General Availability Channel"]="retail" ["RELEASE_TYPE,Release Preview Channel"]="RP" ["RELEASE_TYPE,Beta Channel"]="WIS" ["RELEASE_TYPE,Dev Channel"]="WIF" ["MAGISK_VER,Stable"]="stable" ["MAGISK_VER,Beta"]="beta" ["MAGISK_VER,Canary"]="canary" ["MAGISK_VER,Debug"]="debug" ["MAGISK_VER,Custom"]="--magisk-custom" ["GAPPS_VAR,None"]="none" ["GAPPS_VAR,Pico"]="pico" ["GAPPS_VAR,Full"]="full" ["REMOVE_AMAZON,true"]="--remove-amazon" ["NOFIX_PROPS,true"]="--nofix-props" ["SKIP_DOWNLOAD_WSA,true"]="--skip-download-wsa" ["COMPRESSION,ZIP"]="zip" ["COMPRESSION,7-Zip"]="7z" ["COMPRESSION,XZ"]="xz" )
+                  declare -A opts=( ["ARCH,x86_64"]="x64" ["ARCH,ARM64"]="arm64" ["RELEASE_TYPE,General Availability Channel"]="retail" ["RELEASE_TYPE,Release Preview Channel"]="RP" ["RELEASE_TYPE,Beta Channel"]="WIS" ["RELEASE_TYPE,Dev Channel"]="WIF" ["MAGISK_VER,Magisk Stable"]="stable" ["MAGISK_VER,Magisk Beta"]="beta" ["MAGISK_VER,Magisk Canary"]="canary" ["MAGISK_VER,Magisk Debug"]="debug" ["MAGISK_VER,Magisk Custom"]="--magisk-custom" ["GAPPS_VAR,None"]="none" ["GAPPS_VAR,Pico"]="pico" ["GAPPS_VAR,Full"]="full" ["REMOVE_AMAZON,true"]="--remove-amazon" ["NOFIX_PROPS,true"]="--nofix-props" ["SKIP_DOWNLOAD_WSA,true"]="--skip-download-wsa" ["COMPRESSION,ZIP"]="zip" ["COMPRESSION,7-Zip"]="7z" ["COMPRESSION,XZ"]="xz" )
 
                   ARCH="${opts[ARCH,${{ inputs.arch }}]}"
 
@@ -119,7 +119,7 @@ jobs:
 
                   if [[ "${{ inputs.magisk_ver }}" != "None" ]]; then
                       ROOT_SOL="magisk"
-                      if [[ "${{ inputs.magisk_ver }}" != "Custom" ]]; then
+                      if [[ "${{ inputs.magisk_ver }}" != "Magisk Custom" ]]; then
                           MAGISK_VER="${opts[MAGISK_VER,${{ inputs.magisk_ver }}]}"
                       else
                           echo "${{ inputs.magisk_url }}" > "$DOWNLOAD_DIR"/"$DOWNLOAD_CONF_NAME"
@@ -128,12 +128,12 @@ jobs:
                               echo "Magisk download error!"
                               exit 1
                           fi
-                          CUSTOM_MAGISK="${opts[MAGISK_VER,Custom]}"
-                          MAGISK_VER="${opts[MAGISK_VER,Debug]}"
+                          CUSTOM_MAGISK="${opts[MAGISK_VER,Magisk Custom]}"
+                          MAGISK_VER="${opts[MAGISK_VER,Magisk Debug]}"
                       fi
                   else
                       ROOT_SOL="none"
-                      MAGISK_VER="${opts[MAGISK_VER,Stable]}"
+                      MAGISK_VER="${opts[MAGISK_VER,Magisk Stable]}"
                   fi
 
                   if [[ "${{ inputs.arch }}" == "x86_64" ]]; then
@@ -252,11 +252,11 @@ jobs:
             - name: Generate Release Asset Name
               working-directory: ./output
               run: |
-                  declare -A magisk_vers=( ["Stable"]="stable" ["Beta"]="beta" ["Canary"]="canary" ["Debug"]="debug" )
+                  declare -A magisk_vers=( ["Magisk Stable"]="stable" ["Magisk Beta"]="beta" ["Magisk Canary"]="canary" ["Magisk Debug"]="debug" )
 
                   if [[ "${{ inputs.magisk_ver }}" == "None" ]]; then
                       magiskVer=""
-                  elif [[ "${{ inputs.magisk_ver }}" == "Custom" ]]; then
+                  elif [[ "${{ inputs.magisk_ver }}" == "Magisk Custom" ]]; then
                       magiskVer="_Magisk-Custom"
                   else
                       magiskVer="_Magisk-${{ env.MAGISK_VERSION }}"
