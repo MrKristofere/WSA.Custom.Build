@@ -49,7 +49,7 @@ if res.status_code == 200:
     with open(os.environ['WSA_WORK_ENV'], 'a') as environ_file:
         environ_file.write(f'KERNELSU_VER={release_name}\n')
     with open(os.environ['GITHUB_ENV'], 'a') as environ_file:
-                    environ_file.write(f'KERNELSU_VERSION={kernelVersion}\n')
+        environ_file.write(f'KERNELSU_VERSION={release_name}\n')
 elif res.status_code == 403 and x_ratelimit_remaining == '0':
     message = json_data["message"]
     print(f"Github API Error: {message}", flush=True)
