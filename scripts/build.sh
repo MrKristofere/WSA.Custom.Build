@@ -863,14 +863,7 @@ else
         \033[0m"
     fi
 fi
-artifact_name=WSA_${WSA_VER}_${ARCH}_${WSA_REL}${name1}${name2}
-if [ "$NOFIX_PROPS" = "yes" ]; then
-    artifact_name+="-NoFixProps"
-fi
-if [ "$REMOVE_AMAZON" = "yes" ]; then
-    artifact_name+="-RemovedAmazon"
-fi
-echo "$artifact_name"
+artifact_name="WSA"
 echo -e "\nFinishing building...."
 if [ -f "$OUTPUT_DIR" ]; then
     "$SUDO" rm -rf ${OUTPUT_DIR:?}
@@ -903,7 +896,7 @@ if [ "$COMPRESS_OUTPUT" ] || [ -n "$COMPRESS_FORMAT" ]; then
         fi
     elif [ "$COMPRESS_FORMAT" = "zip" ]; then
         echo "Compressing with zip"
-        7z -tzip a "$OUTPUT_PATH" "$WORK_DIR/wsa/$artifact_name" || abort
+        7z -tzip a -mmt104 -mx4 "$OUTPUT_PATH" "$WORK_DIR/wsa/$artifact_name" || abort
     fi
 else
     rm -rf "${OUTPUT_PATH:?}" || abort
