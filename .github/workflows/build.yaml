@@ -27,11 +27,11 @@ on:
                 type: choice
                 options:
                     - None
+                    - KernelSU
                     - Magisk Stable
                     - Magisk Beta
                     - Magisk Canary
                     - Magisk Debug
-                    - KernelSU
                     - Magisk Custom
             magisk_url:
                 description: "Custom Magisk APK/ZIP URL"
@@ -54,7 +54,7 @@ on:
 #                required: false
 #                type: string
             remove_amazon:
-                description: "Remove Amazon AppStore"
+                description: "Remove Amazon Appstore"
                 required: true
                 default: true
                 type: boolean
