@@ -1,4 +1,4 @@
-name: Custom Build WSA
+name: Build Custom WSA
 on:
     workflow_dispatch:
         inputs:
@@ -32,11 +32,11 @@ on:
                     - Magisk Canary
                     - Magisk Debug
                     - KernelSU
-#                    - Magisk Custom
-#            magisk_url:
-#                description: "Custom Magisk APK/ZIP URL"
-#                required: false
-#                type: string
+                    - Magisk Custom
+            magisk_url:
+                description: "Custom Magisk APK/ZIP URL"
+                required: false
+                type: string
             gapps_var:
                 description: "GApps Variant"
                 required: true
@@ -47,12 +47,12 @@ on:
 #                    - Pico
 #                    - Full
                     - MindTheGapps
-#                    - Custom (OpenGApps)
-#                    - Custom (MindTheGapps)
-#            gapps_url:
-#                description: "Custom GApps ZIP URL"
-#                required: false
-#                type: string
+                    - Custom (OpenGApps)
+                    - Custom (MindTheGapps)
+            gapps_url:
+                description: "Custom GApps ZIP URL"
+                required: false
+                type: string
             remove_amazon:
                 description: "Remove Amazon AppStore"
                 required: true
