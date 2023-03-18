@@ -863,18 +863,7 @@ else
         \033[0m"
     fi
 fi
-
-
-
-
-
-
-
-
-
-
 artifact_name="WSA"
-
 echo -e "\nFinishing building...."
 if [ -f "$OUTPUT_DIR" ]; then
     "$SUDO" rm -rf ${OUTPUT_DIR:?}
@@ -897,27 +886,17 @@ if [ "$COMPRESS_OUTPUT" ] || [ -n "$COMPRESS_FORMAT" ]; then
     fi
     rm -f "${OUTPUT_PATH:?}" || abort
     if [ "$COMPRESS_FORMAT" = "7z" ]; then
-        echo "Compressing with 7z..."
+        echo "Compressing with 7z"
         7z a "${OUTPUT_PATH:?}" "$WORK_DIR/wsa/$artifact_name" || abort
     elif [ "$COMPRESS_FORMAT" = "xz" ]; then
-
         echo "Compressing with tar xz"
         if ! (tar -cP -I 'xz -9 -T0' -f "$OUTPUT_PATH" "$WORK_DIR/wsa/$artifact_name"); then
-
-
-
-
             echo "Out of memory? Trying again with single threads..."
             tar -cPJvf "$OUTPUT_PATH" "$WORK_DIR/wsa/$artifact_name" || abort
         fi
     elif [ "$COMPRESS_FORMAT" = "zip" ]; then
-
         echo "Compressing with zip"
-        7z -tzip a "$OUTPUT_PATH" "$WORK_DIR/wsa/$artifact_name" || abort
-
-
-    
-
+        7z -tzip a -mmt104 -mx4 "$OUTPUT_PATH" "$WORK_DIR/wsa/$artifact_name" || abort
     fi
 else
     rm -rf "${OUTPUT_PATH:?}" || abort
