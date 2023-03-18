@@ -47,12 +47,12 @@ on:
 #                    - Pico
 #                    - Full
                     - MindTheGapps
-                    - Custom (OpenGApps)
-                    - Custom (MindTheGapps)
-            gapps_url:
-                description: "Custom GApps ZIP URL"
-                required: false
-                type: string
+#                    - Custom (OpenGApps)
+#                    - Custom (MindTheGapps)
+#            gapps_url:
+#                description: "Custom GApps ZIP URL"
+#                required: false
+#                type: string
             remove_amazon:
                 description: "Remove Amazon AppStore"
                 required: true
