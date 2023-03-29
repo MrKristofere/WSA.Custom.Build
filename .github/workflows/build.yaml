@@ -76,7 +76,7 @@ on:
                 options:
                     - ZIP
                     - 7-Zip
-                    - XZ
+#                    - XZ
 #            tag:
 #                description: "Release Tag Name"
 #                required: true
