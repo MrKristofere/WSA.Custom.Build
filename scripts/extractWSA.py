@@ -70,6 +70,8 @@ with zipfile.ZipFile(wsa_zip_path) as zip:
                     environ_file.write(f'WSA_VER={long_ver}\n')
                     environ_file.write(f'WSA_MAIN_VER={main_ver}\n')
                     environ_file.write(f'WSA_REL={rel_long}\n')
+                with open(os.environ['GITHUB_ENV'], 'a') as environ_file:
+                    environ_file.write(f'WSA_VER={long_ver}\n')
         filename_lower = f.filename.lower()
         if 'language' in filename_lower or 'scale' in filename_lower:
             print(f"unzipping {filename_lower}", flush=True)
