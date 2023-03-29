@@ -7,8 +7,13 @@ on:
 
   workflow_dispatch:  # click the button on Github repo!
     inputs:
+      repo:
+        description: Source upstream repo
+        default: LSPosed/MagiskOnWSALocal
+        type: string
+        required: true
       branch:
-        description: branch update
+        description: Your branch update
         default: main
         type: string
         required: true
@@ -40,7 +45,7 @@ jobs:
         # REQUIRED 'target_repo_token' exactly like this!
         target_repo_token: ${{ secrets.GITHUB_TOKEN }}
         upstream_sync_branch: main
-        upstream_sync_repo: LSPosed/MagiskOnWSALocal
+        upstream_sync_repo: ${{ inputs.repo }}
         upstream_repo_access_token: ${{ secrets.UPSTREAM_REPO_SECRET }}
 
         # Set test_mode true to run tests instead of the true action!!
