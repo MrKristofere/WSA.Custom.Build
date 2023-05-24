@@ -93,7 +93,7 @@ with zipfile.ZipFile(wsa_zip_path) as zip:
                 with open(env_file, 'w') as environ_file:
                     environ_file.write(str(env))
         filename_lower = f.filename.lower()
-                with open (os.environ['GITHUB_ENV'], 'r') as environ_file:
+                with open (os.environ['GITHUB_ENV'], 'a') as environ_file:
                     environ_file.write(f'WSA_VER={long_ver}\n')
         if 'language' in filename_lower or 'scale' in filename_lower:
             name = f.filename.split("_")[2].split(".")[0]
